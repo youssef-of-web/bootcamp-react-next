@@ -13,11 +13,7 @@ export const UpdateJoke = ({ jokeId, isModalOpen, handleClose }: Joke) => {
   const [form] = Form.useForm();
   const { message } = App.useApp();
   const queryClient = useQueryClient();
-  const {
-    data: singleJoke,
-    isLoading: isLoadingJoke,
-    refetch,
-  } = useQuery({
+  const { data: _singleJoke, isLoading: isLoadingJoke } = useQuery({
     queryKey: ['jokes', jokeId],
     queryFn: async () => {
       const response = await axiosInstance.get(`${ALL_JOKE_API}/${jokeId}`);
@@ -35,13 +31,13 @@ export const UpdateJoke = ({ jokeId, isModalOpen, handleClose }: Joke) => {
       );
       return response.data;
     },
-    onSuccess(data, variables, context) {
+    onSuccess() {
       message.success('Joke updated successfully');
       handleClose();
       form.resetFields();
       queryClient.invalidateQueries({ queryKey: ['jokes'] });
     },
-    onError(error, variables, context) {
+    onError() {
       message.error('Something went wrong');
       handleClose();
       form.resetFields();

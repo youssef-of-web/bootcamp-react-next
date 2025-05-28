@@ -17,13 +17,13 @@ export const AddJoke = ({ openAddJoke, handleCloseAddJoke }: Joke) => {
       const response = await axiosInstance.post(ALL_JOKE_API, data);
       return response.data;
     },
-    onSuccess(data, variables, context) {
+    onSuccess() {
       message.success('Joke added successfully');
       handleCloseAddJoke();
       form.resetFields();
       queryClient.invalidateQueries({ queryKey: ['jokes'] });
     },
-    onError(error, variables, context) {
+    onError() {
       message.error('Something went wrong');
     },
   });
