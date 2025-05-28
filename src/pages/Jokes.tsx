@@ -26,11 +26,11 @@ export const Jokes = () => {
       const response = await axiosInstance.delete(`${ALL_JOKE_API}/${id}`);
       return response.data;
     },
-    onSuccess(data, variables, context) {
+    onSuccess() {
       message.success('Joke deleted successfully');
       queryClient.invalidateQueries({ queryKey: ['jokes'] });
     },
-    onError(error, variables, context) {
+    onError() {
       message.error('Something went wrong');
     },
   });
@@ -66,7 +66,7 @@ export const Jokes = () => {
     {
       title: 'Action',
       key: 'action',
-      render: (text, record) => (
+      render: (_text: any, record: any) => (
         <Flex gap={4}>
           <Button
             shape="circle"
