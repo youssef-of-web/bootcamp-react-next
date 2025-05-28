@@ -15,6 +15,10 @@ export const router = createBrowserRouter([
     element: <Home />,
   },
   {
+    path: '/about',
+    element: <div>about</div>,
+  },
+  {
     path: DASHBOARD,
     element: (
       <AuthProvider>
